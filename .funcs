@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Source a file directly, as well as that file from other environments. See README.md
+envs_source() {
+	if [ "$#" -eq 1 ]
+	then
+		if [ -f "$1" ]
+		then
+			. "$1"
+		fi
+		other_envs_source "$1"
+	fi
+}
+
+# Source a file from other environments. See README.md
+other_envs_source() {
+	if [ "$#" -eq 1 ]
+	then
+		for ext in .personal .work .local
+		do
+			if [ -f "$1$ext" ]
+			then
+				. "$1$ext"
+			fi
+		done
+	fi
+}

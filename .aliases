@@ -1,0 +1,7 @@
+# Set up git.ENV aliases for each present ~/.git.ENV repo
+for ext in .common .personal .work .local
+do
+  if [ -d "$HOME/.git$ext" ]; then
+    alias git$ext="git --git-dir=\"$HOME/.git$ext\""
+  fi
+done

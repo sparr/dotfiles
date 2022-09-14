@@ -1,0 +1,30 @@
+# Using ~ as a git repo requires excluding all files by default
+*
+
+# Then we can un-exclude specific files
+
+# directories must be explicitly un-excluded before files within them
+!/.git.common/
+!/.git.common/info/
+!/.git.common/info/exclude # this file # ineffective
+
+!/README.md
+
+# shell setup
+!/.aliases
+!/.bash_logout
+!/.bash_profile
+!/.bashrc
+!/.funcs
+!/.zshrc
+
+# ssh
+!/.ssh/
+!/.ssh/config
+
+# config directory
+!/.config/
+
+# git
+!/.config/git/ # ineffective
+!/.config/git/config
