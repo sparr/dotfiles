@@ -12,6 +12,7 @@ git.common branch -m main
 git.common config --local core.bare false
 git.common remote add origin git@github.com:sparr/dotfiles.git
 git.common fetch --all
+git.common branch --set-upstream-to=origin/main main
 # the following step will forcibly overwrite files in your home
 git.common reset --hard origin/master
 ```
