@@ -15,6 +15,7 @@
 !/.bash_logout
 !/.bash_profile
 !/.bashrc
+!/.env
 !/.funcs
 !/.path
 !/.zshrc
