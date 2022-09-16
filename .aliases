@@ -2,7 +2,7 @@
 for ext in common personal work local
 do
   if [ -d "$HOME/.git.$ext" ]; then
-    alias git$ext='git --work-tree="$HOME" --git-dir="$HOME/.git.$ext"'
+    alias git.$ext="git --work-tree=\"$HOME\" --git-dir=\"$HOME/.git.$ext\""
   fi
 done
 alias git.all='(){if [ $# -eq 0 ]; then git; else for ext in common personal work local; do if [ -d "$HOME/.git.$ext" ]; then echo "=== $ext ==="; git --work-tree="$HOME" --git-dir="$HOME/.git.$ext" $@; fi; done; fi;}'
