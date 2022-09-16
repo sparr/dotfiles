@@ -42,3 +42,17 @@ autoload -Uz compinit && compinit -i
 
 # https://github.com/nvbn/thefuck#experimental-instant-mode
 eval $(thefuck --alias --enable-experimental-instant-mode)
+
+# makes color constants available
+autoload -U colors
+colors
+
+# command history
+setopt hist_ignore_all_dups inc_append_history
+HISTFILE=~/.zhistory
+HISTSIZE=4096
+SAVEHIST=4096
+
+# handy keybindings
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
