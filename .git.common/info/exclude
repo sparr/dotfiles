@@ -6,7 +6,7 @@
 # directories must be explicitly un-excluded before files within them
 !/.git.common/
 !/.git.common/info/
-!/.git.common/info/exclude # this file # ineffective
+!/.git.common/info/exclude # this file
 
 !/README.md
 
