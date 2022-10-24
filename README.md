@@ -27,4 +27,10 @@ Some configuration files and scripts in this repo will include additional option
 
 e.g. [.bashrc](.bashrc) uses [.funcs](.funcs) to source [.aliases](.aliases), `.aliases.personal`, etc, and [.config/git/config](.config/git/config) has an `[include]` section referring to `.config/git/config.work`, etc.
 
-If you clone environmental dotfiles repos `~/.git.*` then [.aliases](.aliases) will create matching `git.*` aliases.
+If you clone environmental dotfiles repos to `~/.git.*` then [.aliases](.aliases) will create matching `git.*` aliases.
+
+## Usage
+
+To add a new file, edit `~/.git.common/info/exclude` to un-exclude the new file and any directories above it.
+
+After modifying one or more files, do `git.common add` then `git.common commit` then `git.common push`.
