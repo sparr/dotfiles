@@ -31,6 +31,13 @@ If you clone environmental dotfiles repos to `~/.git.*` then [.aliases](.aliases
 
 ## Usage
 
-To add a new file, edit `~/.git.common/info/exclude` to un-exclude the new file and any directories above it.
+### Add a new file to a dotfiles repo
+Edit `~/.git.ENV/info/exclude` to un-exclude the new file and any directories above it.
 
-After modifying one or more files, do `git.common add` then `git.common commit` then `git.common push`.
+### Pushing changes to files
+1. `git.ENV add` for the new/modified file(s)
+2. `git.ENV commit`
+3. `git.ENV push`.
+
+### Operate on all environments
+The `git.all` alias will run a git command in every environment. `git.all status` is safe and useful. Non-read-only operations like `git.all commit -a` or `git.all push` should be used carefully.
