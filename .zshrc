@@ -41,7 +41,10 @@ ssh() {
 autoload -Uz compinit && compinit -i
 
 # https://github.com/nvbn/thefuck#experimental-instant-mode
-eval $(thefuck --alias --enable-experimental-instant-mode)
+if command -v thefuck &> /dev/null
+then
+    eval $(thefuck --alias --enable-experimental-instant-mode)
+fi
 
 # makes color constants available
 autoload -U colors
