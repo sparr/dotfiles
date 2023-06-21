@@ -36,3 +36,4 @@
 # git
 !/.config/git/ # ineffective
 !/.config/git/config
+!/.config/git/ignore
