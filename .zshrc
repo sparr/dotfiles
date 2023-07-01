@@ -16,15 +16,12 @@ envs_source "$HOME/.path"
 # deduplicate the path
 typeset -U path
 
-#???
-export AUTO_TITLE_SCREENS="NO"
-
-#???
+# set the prompt
 export PROMPT="
-%{$fg[white]%}(%D %*) <%?> [%~] $program %{$fg[default]%}
-%{$fg[cyan]%}%m %#%{$fg[default]%} "
+%{%F{white}%}(%D{%Y-%m-%d} %*) <%?> [%3~] $program %{%F{default}%}
+%{%F{cyan}%}%m %#%{%F{default}%} "
 
-#???
+# no right-aligned prompt
 export RPROMPT=
 
 #???
