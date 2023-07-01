@@ -6,6 +6,7 @@ envs_source() {
 	then
 		if [ -f "$1" ]
 		then
+			# shellcheck disable=SC1090 # shellcheck doesn't like sourcing files it doesn't know the name of
 			. "$1"
 		fi
 		other_envs_source "$1"
@@ -16,11 +17,12 @@ envs_source() {
 other_envs_source() {
 	if [ "$#" -eq 1 ]
 	then
-		for ext in .personal .work .local
+		for env in $(basename -a "$HOME"/.git.* | cut -d "." -f 3)
 		do
-			if [ -f "$1$ext" ]
+			if [ -f "$1.$env" ]
 			then
-				. "$1$ext"
+				# shellcheck disable=SC1090 # shellcheck doesn't like sourcing files it doesn't know the name of
+				. "$1.$env"
 			fi
 		done
 	fi

@@ -1,8 +1,9 @@
 # Set up git.ENV aliases for each present ~/.git.ENV repo
-for ext in common personal work local
+for env in $(basename -a "$HOME"/.git.* | cut -d "." -f 3)
 do
-  if [ -d "$HOME/.git.$ext" ]; then
-    alias git.$ext="git --work-tree=\"$HOME\" --git-dir=\"$HOME/.git.$ext\""
-  fi
+  # shellcheck disable=SC2139 # expanding $env now instead of at runtime is intentional
+  alias "git.$env"='git --work-tree="$HOME" --git-dir="$HOME/.git.'"$env"'"'
 done
-alias git.all='(){if [ $# -eq 0 ]; then git; else for ext in common personal work local; do if [ -d "$HOME/.git.$ext" ]; then echo "=== $ext ==="; git --work-tree="$HOME" --git-dir="$HOME/.git.$ext" $@; fi; done; fi;}'
+# shellcheck disable=SC2142 # positional parameters are valid in an alias function
+alias git.all='(){if [ $# -eq 0 ]; then git; else for env in $(basename -a "$HOME"/.git.* | cut -d "." -f 3); do echo "=== git.$env ==="; git --work-tree="$HOME" --git-dir="$HOME/.git.$env" $@; done; fi;}'
+
