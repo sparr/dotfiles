@@ -18,6 +18,7 @@
 !/.env
 !/.funcs
 !/.path
+!/.shellrc
 !/.zshrc
 !/.zshrc.common
 
