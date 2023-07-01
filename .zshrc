@@ -1,17 +1,17 @@
 #!/usr/bin/zsh
 
 # This script provides functions to run environment-specific variants of other scripts
-source ~/.funcs
+source "$HOME/.funcs"
 
 # Scripts that need to be run prior to anything else
-envs_source ~/.setup
+envs_source "$HOME/.setup"
 
 # Environment variables
-envs_source ~/.env
+envs_source "$HOME/.env"
 
 # Separate files for easier management and use in multiple shells
-envs_source ~/.aliases
-envs_source ~/.path
+envs_source "$HOME/.aliases"
+envs_source "$HOME/.path"
 
 # deduplicate the path
 typeset -U path
