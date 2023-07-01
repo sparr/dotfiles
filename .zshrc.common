@@ -1,0 +1,115 @@
+
+# set the prompt
+export PROMPT="
+%{%F{white}%}(%D{%Y-%m-%d} %*) <%?> [%3~] %{%F{default}%}
+%{%F{cyan}%}%m %#%{%F{default}%} "
+
+# no right-aligned prompt
+export RPROMPT=
+
+# set the gui terminal title
+# https://tldp.org/HOWTO/Xterm-Title-3.html
+set-xterm-title() {
+    echo -e "\e]0;$*\007"
+}
+
+# "alias" to change window title when ssh'ing to another host
+ssh() {
+    set-xterm-title "$@";
+    /usr/bin/ssh -2 "$@";
+    set-xterm-title "$HOST";
+}
+
+# The following lines were added by compinstall
+zstyle ':completion:*' completer _complete _ignored
+zstyle :compinstall filename '/home/sparr/.zshrc'
+# zsh auto completion initialization, silently skipping insecure files (-i)
+autoload -Uz compinit && compinit -i
+
+# https://github.com/nvbn/thefuck#experimental-instant-mode
+if command -v thefuck &> /dev/null
+then
+    eval "$(thefuck --alias --enable-experimental-instant-mode)"
+fi
+
+# make color constants available for scripts that need them
+autoload -U colors
+colors
+
+# command history
+# when trimming the history, eliminate the oldest non-unique entry first
+setopt HIST_EXPIRE_DUPS_FIRST
+# add history entries to the file as soon as the command finishes, later than INC_APPEND_HISTORY, sooner than APPEND_HISTORY
+setopt INC_APPEND_HISTORY_TIME
+# store start time and duration for history entries, but they won't be available until the command finishes
+setopt EXTENDED_HISTORY
+# skip non-consecutive duplicates when searching history (consecutive are always skipped)
+setopt HIST_FIND_NO_DUPS
+HISTFILE=~/.zhistory
+HISTSIZE=5000
+# shellcheck disable=SC2034 # shellcheck doesn't recognize SAVEHIST is used by zsh
+SAVEHIST=4000
+
+# set command line editing to use emacs-like key binds
+bindkey -e
+
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -g -A key
+
+# shellcheck disable=SC2154 # shellcheck doesn't recognize zsh $terminfo map
+# populate key escape code hash
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+key[Control-Left]="${terminfo[kLFT5]}"
+key[Control-Right]="${terminfo[kRIT5]}"
+
+# bind keys according to the key escape code hash
+[[ -n "${key[Home]}"          ]] && bindkey -- "${key[Home]}"          beginning-of-line
+[[ -n "${key[End]}"           ]] && bindkey -- "${key[End]}"           end-of-line
+[[ -n "${key[Insert]}"        ]] && bindkey -- "${key[Insert]}"        overwrite-mode
+[[ -n "${key[Backspace]}"     ]] && bindkey -- "${key[Backspace]}"     backward-delete-char
+[[ -n "${key[Delete]}"        ]] && bindkey -- "${key[Delete]}"        delete-char
+# [[ -n "${key[Up]}"            ]] && bindkey -- "${key[Up]}"            up-line-or-history
+# [[ -n "${key[Down]}"          ]] && bindkey -- "${key[Down]}"          down-line-or-history
+[[ -n "${key[Left]}"          ]] && bindkey -- "${key[Left]}"          backward-char
+[[ -n "${key[Right]}"         ]] && bindkey -- "${key[Right]}"         forward-char
+[[ -n "${key[PageUp]}"        ]] && bindkey -- "${key[PageUp]}"        beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}"      ]] && bindkey -- "${key[PageDown]}"      end-of-buffer-or-history
+[[ -n "${key[Shift-Tab]}"     ]] && bindkey -- "${key[Shift-Tab]}"     reverse-menu-complete
+[[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
+[[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
+
+# set up up/down at command line to perform history search up to the current cursor position
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+[[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
+[[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx; }
+	function zle_application_mode_stop { echoti rmkx; }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
+# reset terminal to cancel alternate character sets before drawing the prompt
+autoload -Uz add-zsh-hook
+function reset_broken_terminal () {
+	printf '%b' '\e[0m\e(B\e)0\017\e[?5l\e7\e[0;0r\e8'
+}
+add-zsh-hook -Uz precmd reset_broken_terminal

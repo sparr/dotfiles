@@ -19,6 +19,7 @@
 !/.funcs
 !/.path
 !/.zshrc
+!/.zshrc.common
 
 # ssh
 !/.ssh/
