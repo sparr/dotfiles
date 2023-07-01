@@ -7,3 +7,5 @@ done
 # shellcheck disable=SC2142 # positional parameters are valid in an alias function
 alias git.all='(){if [ $# -eq 0 ]; then git; else for env in $(basename -a "$HOME"/.git.* | cut -d "." -f 3); do echo "=== git.$env ==="; git --work-tree="$HOME" --git-dir="$HOME/.git.$env" $@; done; fi;}'
 
+# convenience aliases
+alias ls="ls --color"
