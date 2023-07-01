@@ -24,16 +24,17 @@ export PROMPT="
 # no right-aligned prompt
 export RPROMPT=
 
-#???
-set-title() {
+# set the gui terminal title
+# https://tldp.org/HOWTO/Xterm-Title-3.html
+set-xterm-title() {
     echo -e "\e]0;$*\007"
 }
 
-#???
+# "alias" to change window title when ssh'ing to another host
 ssh() {
-    set-title $*;
+    set-xterm-title $*;
     /usr/bin/ssh -2 $*;
-    set-title $HOST;
+    set-xterm-title $HOST;
 }
 
 # zsh auto completion initialization
