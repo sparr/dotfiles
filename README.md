@@ -4,7 +4,8 @@ This repo contains my dotfiles which are common across all environments.
 
 ## Setup
 
-```bash
+### Dotfiles Setup
+```sh
 cd ~
 alias git.common="git --git-dir=\"$HOME/.git.common\""
 git.common init
@@ -12,11 +13,16 @@ git.common branch -m main
 git.common config --local core.bare false
 git.common remote add origin git@github.com:sparr/dotfiles.git
 git.common fetch --all
-git.common branch --set-upstream-to=origin/main main
 # the following step will forcibly overwrite files in your home
-git.common reset --hard origin/master
+git.common reset --hard origin/main
+git.common branch --set-upstream-to=origin/main main
 ```
 The `git.common` alias will be created by [.aliases](.aliases) in future shells.
+
+### Shell Setup
+```sh
+chsh -s /usr/bin/zsh
+```
 
 ## Environment Dotfiles
 
