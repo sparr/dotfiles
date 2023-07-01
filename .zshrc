@@ -46,15 +46,22 @@ then
     eval $(thefuck --alias --enable-experimental-instant-mode)
 fi
 
-# makes color constants available
+# makes color constants available for scripts that need them
 autoload -U colors
 colors
 
 # command history
-setopt hist_ignore_all_dups inc_append_history
+# when trimming the history, eliminate the oldest non-unique entry first
+setopt HIST_EXPIRE_DUPS_FIRST
+# add history entries to the file as soon as the command finishes, later than INC_APPEND_HISTORY, sooner than APPEND_HISTORY
+setopt INC_APPEND_HISTORY_TIME
+# store start time and duration for history entries, but they won't be available until the command finishes
+setopt EXTENDED_HISTORY
+# skip non-consecutive duplicates when searching history (consecutive are always skipped)
+setopt HIST_FIND_NO_DUPS
 HISTFILE=~/.zhistory
-HISTSIZE=4096
-SAVEHIST=4096
+HISTSIZE=5000
+SAVEHIST=4000
 
 # handy keybindings
 bindkey "^A" beginning-of-line
