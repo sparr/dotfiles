@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # .bashrc
 # bash runs this script when a non-login shell is launched
 

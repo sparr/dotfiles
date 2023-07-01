@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 # This script provides functions to run environment-specific variants of other scripts
 source ~/.funcs
 
