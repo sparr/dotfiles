@@ -1,5 +1,16 @@
 #!/bin/bash
 
+_envs_enumerate() {
+	printf "common\npersonal\nwork"
+	basename -a "$HOME"/.git.* | cut -d "." -f 3
+	echo local
+}
+
+
+envs_enumerate() {
+	_envs_enumerate | awk '!x[$0]++'
+}
+
 # Source a file directly, as well as that file from other environments. See README.md
 envs_source() {
 	if [ "$#" -eq 1 ]
@@ -7,7 +18,7 @@ envs_source() {
 		if [ -f "$1" ]
 		then
 			# shellcheck disable=SC1090 # shellcheck doesn't like sourcing files it doesn't know the name of
-			. "$1"
+			source "$1"
 		fi
 		other_envs_source "$1"
 	fi
@@ -17,12 +28,12 @@ envs_source() {
 other_envs_source() {
 	if [ "$#" -eq 1 ]
 	then
-		for env in $(basename -a "$HOME"/.git.* | cut -d "." -f 3)
+		for env in $(envs_enumerate)
 		do
 			if [ -f "$1.$env" ]
 			then
 				# shellcheck disable=SC1090 # shellcheck doesn't like sourcing files it doesn't know the name of
-				. "$1.$env"
+				source "$1.$env"
 			fi
 		done
 	fi
