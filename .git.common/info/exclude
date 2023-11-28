@@ -1,12 +1,20 @@
+# BEGIN DOTFILES EXCLUDE TEMPLATE
+# Copy this template to new environment exclude files.
+
+# Dotfiles exclude template from https://github.com/sparr/dotfiles/blob/main/.git.common/info/exclude
+
 # Using ~ as a git repo requires excluding all files by default
 *
 
 # Then we can un-exclude specific files
 
 # directories must be explicitly un-excluded before files within them
+# Change ".git.common" to ".git.NEWENVNAME" for new environments
 !/.git.common/
 !/.git.common/info/
 !/.git.common/info/exclude # this file
+
+# END DOTFILES EXCLUDE TEMPLATE
 
 !/README.md
 
