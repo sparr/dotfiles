@@ -56,10 +56,43 @@ The `git.all` alias will run a git command in every environment. `git.all status
 
 ### Create a new environment
 
-#### Predefined
+#### Hard-coded predefined environments
 
-Adding `~/.config/git/config.foo` or `~/.ssh/config.foo` or similar, where the main configuration only knows about the predefined environments, requires editing the main config to include the new file. No script or hook yet exists to automate adding these.
+Some configuration files cannot enumerate arbitrary environment files to incliude. These main config files have hard-coded lists of other environment configs that must be edited if a non-predefined environment is created.
 
-#### Enumerated
+Known such configs:
+* [`.config/git/config`](.config/git/config)
+* [`.ssh/config`](.ssh/config)
 
-Enumerated environments depend on the existence of `~/.git.foo`, which will cause configuration scripts like `~/.setup.foo` and `~/.aliases.foo` to be run at the appropriate time. While this could be an empty file, it is recommended to instead make it a git repository created similarly to `~/.git.common` earlier in the setup step, and to version control those `foo`-environment scripts in that repository.
+#### Enumerated environments
+
+Configuration based on shell scripts, such as [`.bashrc`](.bashrc) and [`.zshrc`](.zshrc), do not rely on hard-coded predefined environment lists. They use functions from [`.funcs`](.funcs) to enumerate environments dynamically. This pattern should be followed where possible.
+
+The enumeration functionality for custom environments (other than `common`, `work`, `local`) depend on the existence of `~/.git.foo`, which will cause configuration scripts like `~/.setup.foo` and `~/.aliases.foo` to be run at the appropriate time. While this could be an empty file, it is recommended to instead follow the [instructions below](step-by-step) to create a git repository similar to `~/.git.common`, and to version control those environment scripts in that repository.
+
+#### Step by step
+
+Follow these steps to set up a work environment, or similar steps for other environments:
+
+```sh
+alias git.work='git --git-dir="$HOME/.git.work"'
+git.work init
+git.work branch -m main
+git.work config --local core.bare false
+
+# create a remote repo to store the new environment if necessary, then:
+git.work remote add origin https://foo/bar.git
+
+cp ~/.git.common/info/exclude ~/.git.work/info/exclude
+# edit ~/.git.work/info/exclude, keep and edit the template at the top, delete the rest
+git.work add -f ~/.git.work/info/exclude
+git.work commit -m "Initial commit. Create work environment. Template Exclude file"
+
+# create/edit ~/.config/git/config.work with work email, name, etc
+# edit ~/.git.work/info/exclude, add ! entries for ~/.config ~/.config/git ~/.config/git/config.work
+git.work add ~/.config/git/config.work
+git.work commit -m "Set git email and name"
+
+# if remote repo exists
+git.work push
+```
