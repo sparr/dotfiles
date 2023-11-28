@@ -12,3 +12,8 @@ envs_source "$HOME/.env"
 # Separate files for easier management and use in multiple shells
 envs_source "$HOME/.path"
 envs_source "$HOME/.aliases"
+
+# nvm setup
+test -d "$HOME/.nvm" && export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -n "$BASH" ] && [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
