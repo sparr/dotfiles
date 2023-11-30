@@ -16,7 +16,3 @@ source "$HOME/.shellrc"
 
 # Environment-specific bash rc files
 other_envs_source "$HOME/.bashrc"
-
-# Set up installed completion scripts
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-
