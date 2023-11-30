@@ -3,6 +3,8 @@ for env in $(basename -a "$HOME"/.git.* | cut -d "." -f 3)
 do
   # shellcheck disable=SC2139 # expanding $env now instead of at runtime is intentional
   alias "git.$env"='git --work-tree="$HOME" --git-dir="$HOME/.git.'"$env"'"'
+  # shellcheck disable=SC2139 # expanding $env now instead of at runtime is intentional
+  alias "gitenv.$env"='GIT_WORK_TREE="$HOME" GIT_DIR="$HOME/.git.'"$env"'"'
 done
 # shellcheck disable=SC2142 # positional parameters are valid in an alias function
 alias git.all='(){if [ $# -eq 0 ]; then git; else for env in $(basename -a "$HOME"/.git.* | cut -d "." -f 3); do echo "=== git.$env ==="; git --work-tree="$HOME" --git-dir="$HOME/.git.$env" $@; done; fi;}'
