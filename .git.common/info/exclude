@@ -23,6 +23,7 @@
 !/.bash_logout
 !/.bash_profile
 !/.bashrc
+!/.bashrc.common
 !/.env
 !/.funcs
 !/.path
