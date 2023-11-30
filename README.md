@@ -10,6 +10,7 @@ cd ~
 alias git.common='git --git-dir="$HOME/.git.common"'
 git.common init
 git.common branch -m main
+# initializing a git dir that doesn't end in .git incorrectly implies that the repo is "bare" with no working tree
 git.common config --local core.bare false
 git.common remote add origin git@github.com:sparr/dotfiles.git
 git.common fetch --all
