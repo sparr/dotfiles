@@ -13,4 +13,4 @@ alias git.all='(){if [ $# -eq 0 ]; then git; else for env in $(basename -a "$HOM
 alias ls="ls --color"
 
 # make command consistent from VSCodium to VSCode/Code-OSS
-command -v codium &> /dev/null && command -v code &> /dev/null || alias code=codium
+command -v codium &> /dev/null && ! command -v code &> /dev/null && alias code=codium
