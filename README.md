@@ -2,6 +2,8 @@
 
 This repo contains my dotfiles which are common across all environments.
 
+The core and most novel feature of this repo is splitting configuration into multiple files based on what usage "environment" you might be working in, providing configs and shell functions to enumerate those environment configurations, and implementing git aliases and configuration for keeping each environment's files in a separate repo despite them sharing your home directory as their working directory.
+
 ## Setup
 
 ### Dotfiles Setup
@@ -28,16 +30,10 @@ zsh
 
 ## Environment Dotfiles
 
-The core and most novel feature of this repo is splitting configuration into multiple files based on what usage "environment" you might be working in.
-
 The following environments are predefined and will be checked for in every config and script that is aware of this dotfiles system.
 * .personal - private, belongs only on personal computers, store in a secure private repository
 * .work - private, belongs only on work computers, store in a secure work repository
 * .local - specific to one machine, store in a local repository
-
-For configs with static include lists, such as `~/.config/git/config` and `~/.ssh/config`, additional entries must be added manually for new environments.
-
-For configs implemented as scripts, such as all of the bash and zsh configs, additional enviroments will be enumerated if `~/.git.ENVNAME` exists, similar to the `~/.git.common` created during setup. This is handled by functions in [.funcs](.funcs).
 
 ## Usage
 
