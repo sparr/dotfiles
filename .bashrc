@@ -7,10 +7,8 @@
 PS1='[\u@\h \W]\$ '
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-	# shellcheck source=/dev/null
-	. /etc/bashrc
-fi
+# shellcheck source=/dev/null
+[ -r /etc/bashrc ] && source /etc/bashrc
 
 source "$HOME/.shellrc"
 

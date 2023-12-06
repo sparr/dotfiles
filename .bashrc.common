@@ -9,21 +9,10 @@ if [[ -r "/usr/share/bash-completion/bash_completion" ]]
 then
   source "/usr/share/bash-completion/bash_completion"
 fi
-for COMPLETION in "/etc/bash_completion.d/"*
+
+# completions for Homebrew
+[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ] && source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
 do
   [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
 done
-
-# completions for Homebrew
-if type brew &>/dev/null
-then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
-  then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  fi
-  for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
-  do
-    [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-  done
-fi
