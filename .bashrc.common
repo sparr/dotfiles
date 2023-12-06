@@ -16,3 +16,6 @@ for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
 do
   [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
 done
+
+# disable MacOS "The default interactive shell is now zsh." warning
+BASH_SILENCE_DEPRECATION_WARNING=1
