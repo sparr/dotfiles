@@ -51,7 +51,7 @@ setopt INC_APPEND_HISTORY_TIME
 setopt EXTENDED_HISTORY
 # skip non-consecutive duplicates when searching history (consecutive are always skipped)
 setopt HIST_FIND_NO_DUPS
-HISTFILE=~/.zhistory
+#HISTFILE=~/.zhistory
 HISTSIZE=5000
 # shellcheck disable=SC2034 # shellcheck doesn't recognize SAVEHIST is used by zsh
 SAVEHIST=4000
@@ -124,3 +124,9 @@ add-zsh-hook -Uz precmd reset_broken_terminal
 
 # allow pasting shell scripts with comments, otherwise `# foo` produces "zsh: command not found: #"
 setopt interactivecomments
+
+### begin xdg-ninja suggestions to move ~/.foo to more appropriate locations
+SHELL_SESSIONS_DISABLE=1
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh # may not work here, could need to be in /etc/zshenv

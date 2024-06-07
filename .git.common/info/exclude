@@ -28,6 +28,7 @@
 !/.funcs
 !/.path
 !/.shellrc
+!/.shellrc.common
 !/.zshrc
 !/.zshrc.common
 
@@ -46,3 +47,15 @@
 !/.config/git/ # ineffective
 !/.config/git/config
 !/.config/git/ignore
+
+# vim
+!/.config/vim/
+!/.config/vim/vimrc
+
+# npm
+!/.config/npm/
+!/.config/npm/config
+
+# maven
+!/.config/maven/
+!/.config/maven/settings.xml

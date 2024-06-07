@@ -19,3 +19,6 @@ done
 
 # disable MacOS "The default interactive shell is now zsh." warning
 BASH_SILENCE_DEPRECATION_WARNING=1
+
+### begin xdg-ninja suggestions to move ~/.foo to more appropriate locations
+export HISTFILE="${XDG_STATE_HOME}"/bash/history
