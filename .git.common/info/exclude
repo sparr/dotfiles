@@ -30,8 +30,12 @@
 !/.path
 !/.shellrc
 !/.shellrc.common
-!/.zshrc
-!/.zshrc.common
+
+# zsh
+!/.zshenv
+!/.config/zsh/
+!/.config/zsh/zshrc
+!/.config/zsh/zshrc.common
 
 # ssh
 !/.ssh/
