@@ -2,7 +2,7 @@
 
 _envs_enumerate() {
 	printf "common\npersonal\nwork"
-	basename -a "$HOME"/.git.* | cut -d "." -f 3
+	basename -a "${HOME}"/.git.* | cut -d "." -f 3
 	echo local
 }
 
@@ -18,7 +18,7 @@ envs_source() {
 		if [ -f "$1" ]
 		then
 			# shellcheck disable=SC1090 # shellcheck doesn't like sourcing files it doesn't know the name of
-			source "$1"
+			. "$1"
 		fi
 		other_envs_source "$1"
 	fi
@@ -30,10 +30,10 @@ other_envs_source() {
 	then
 		for env in $(envs_enumerate)
 		do
-			if [ -f "$1.$env" ]
+			if [ -f "$1.${env}" ]
 			then
 				# shellcheck disable=SC1090 # shellcheck doesn't like sourcing files it doesn't know the name of
-				source "$1.$env"
+				. "$1.${env}"
 			fi
 		done
 	fi

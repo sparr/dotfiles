@@ -1,17 +1,17 @@
 # This file has early setup common to both .bashrc and .zshrc
 
 # This script provides functions to run environment-specific variants of other scripts
-source "$HOME/.funcs"
+. "${HOME}/.funcs"
 
 # Scripts that need to be run prior to anything else
-envs_source "$HOME/.setup"
+envs_source "${HOME}/.setup"
 
 # Environment variables
-envs_source "$HOME/.env"
+envs_source "${HOME}/.env"
 
 # Separate files for easier management and use in multiple shells
-envs_source "$HOME/.path"
-envs_source "$HOME/.aliases"
+envs_source "${HOME}/.path"
+envs_source "${HOME}/.aliases"
 
 # Environment-agnostic rc files
-other_envs_source "$HOME/.shellrc"
+other_envs_source "${HOME}/.shellrc"

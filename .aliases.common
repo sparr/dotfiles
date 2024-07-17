@@ -2,4 +2,4 @@
 alias ls="ls --color"
 
 # make command consistent from VSCodium to VSCode/Code-OSS
-command -v codium &> /dev/null && ! command -v code &> /dev/null && alias code=codium
+command -v codium > /dev/null 2>&1 && ! command -v code > /dev/null 2>&1 && alias code=codium

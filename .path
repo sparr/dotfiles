@@ -1,3 +1,3 @@
-export PATH=$HOME/.local/bin:$PATH
-[ -d ${HOMEBREW_PREFIX} ] && export PATH=${HOMEBREW_PREFIX}/sbin:${HOMEBREW_PREFIX}/bin:$PATH
-[ -d ${HOMEBREW_PREFIX}/opt/openjdk/bin ] && export PATH=${HOMEBREW_PREFIX}/opt/openjdk/bin:$PATH
+export PATH="${HOME}"/.local/bin:"${PATH}"
+[ -d "${HOMEBREW_PREFIX}" ] && export PATH="${HOMEBREW_PREFIX}"/sbin:"${HOMEBREW_PREFIX}"/bin:"${PATH}"
+[ -d "${HOMEBREW_PREFIX}"/opt/openjdk/bin ] && export PATH="${HOMEBREW_PREFIX}"/opt/openjdk/bin:"${PATH}"

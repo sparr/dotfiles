@@ -1,5 +1,5 @@
 # nvm setup
-test -d "$HOME/.nvm" && export NVM_DIR="$HOME/.nvm"
+test -d "${HOME}/.nvm" && export NVM_DIR="${HOME}/.nvm"
 [ -s "/usr/share/nvm/init-nvm.sh" ] && source "/usr/share/nvm/init-nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -n "$BASH" ] && [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
