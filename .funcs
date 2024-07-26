@@ -1,17 +1,18 @@
 #!/bin/bash
 
+# enumerate default environments and any ~/.git.foo environments, including possible duplicates
 _envs_enumerate() {
 	printf "common\npersonal\nwork"
 	basename -a "${HOME}"/.git.* | cut -d "." -f 3
 	echo local
 }
 
-
+# enumerate default environments and any ~/.git.foo environments
 envs_enumerate() {
 	_envs_enumerate | awk '!x[$0]++'
 }
 
-# Source a file directly, as well as that file from other environments. See README.md
+# Source a file directly, as well as that file from other dotfiles environments. See README.md
 envs_source() {
 	if [ "$#" -eq 1 ]
 	then
@@ -24,7 +25,7 @@ envs_source() {
 	fi
 }
 
-# Source a file from other environments. See README.md
+# Source a file from other dotfiles environments. See README.md
 other_envs_source() {
 	if [ "$#" -eq 1 ]
 	then
