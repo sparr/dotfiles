@@ -38,3 +38,20 @@ other_envs_source() {
 		done
 	fi
 }
+
+# source a file in /usr or /usr/local or $HOMEBREW_PREFIX
+cross_platform_source() {
+	if [ "$#" -eq 1 ]
+	then
+		if [ -f "/usr/$1" ]
+		then
+			. "/usr/$1"
+		elif [ -f "/usr/local/$1" ]
+		then
+			. "/usr/local/$1"
+		elif [ -f "$HOMEBREW_PREFIX/$1" ]
+		then
+			. "$HOMEBREW_PREFIX/$1"
+		fi
+	fi
+}
