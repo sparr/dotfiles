@@ -127,7 +127,8 @@ setopt interactivecomments
 ### begin xdg-ninja suggestions to move ~/.foo to more appropriate locations
 SHELL_SESSIONS_DISABLE=1
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-export HISTFILE="$XDG_STATE_HOME"/zsh/history
+mkdir -p "${XDG_STATE_HOME}"/zsh
+export HISTFILE="${XDG_STATE_HOME}"/zsh/history
 ### end xdg-ninja suggestions
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
